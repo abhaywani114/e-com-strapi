@@ -2,6 +2,8 @@ import {useState, useContext} from "react"
 import {AppContext, AppAction} from "../../context/AppContext"
 import {withBaseUrl} from "../../service/strapi"
 import styles from "./SingleProduct.module.scss";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 import {
     FaFacebookF,
     FaTwitter,
@@ -32,7 +34,14 @@ const SingleProduct = ({data, relatedProducts}) => {
     <>
     <div className={styles.singleProductContainer}>
       <div className={styles.left}>
-        <img alt={images[0].attributes.alternativeText} src={withBaseUrl(images[0].attributes.url)} />
+        <Carousel showIndicators={false}>
+          {
+            images.map( i=> {
+              return (
+                  <img alt={i.attributes.alternativeText} src={withBaseUrl(i.attributes.url)} />
+              )
+            })}
+        </Carousel>
       </div>
       <div className={styles.right}>
         <div className={styles.name}>{productAttribute.title}</div>
