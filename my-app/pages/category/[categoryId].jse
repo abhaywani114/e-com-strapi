@@ -1,0 +1,29 @@
+import Layout from "../../components/Layout"
+import Products from "../../components/Products/Products"
+import style from "../../styles/Home.module.scss"
+import {getCategoryProduct} from "../../service/stripeAPI"
+import {useRouter} from "next/router"
+
+export async function getServerSideProps(req, res) {
+  const {categoryId} = req.query;
+  const {data} = await getCategoryProduct(categoryId);
+  return {
+    props: {
+      categoryName: data?.[0]?.attributes?.categories?.data?.[0]
+                            ?.attributes?.title ?? "No Products Available Right now",
+      data
+    }
+  }
+}
+
+export default function CategoryName({categoryName, data}) {
+  return (
+    <Layout title={`Products: ${categoryName.toUpperCase()}`}>
+      <div className={style.mainContent}>
+        <div className={style.layout}>
+          <Products CategoryName={categoryName} data={data}/>
+        </div>
+      </div>
+    </Layout>
+  )
+}

@@ -1,0 +1,64 @@
+
+@import "../../css-config/mixins.scss";
+
+
+.paymentStatusDiv {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .paymentStatusContent {
+    text-align: center;
+    background: #ffffffeb;
+    padding: 35px;
+    box-shadow: 7px 5px 4px 4px #4a00c021;
+    border-radius: 10px;
+    .innerContent {
+      z-index: 10;
+        h1 {
+          line-height: 40px;
+          font-size: 40px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          letter-spacing: 1.2px;
+        }
+
+        h2 {
+           font-weight: 400;
+           font-size: 25px;
+           margin-bottom: 10px;
+        }
+
+        svg {
+            font-size: 9rem;
+        }
+       
+        svg.success {
+            color: green;
+        }
+
+        svg.error {
+            color: red;
+        }
+    }
+    
+    .bgSuccess {
+      background: linear-gradient(to right, #f8e3e300, #6bd34f);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+    }
+
+    .bgError {
+      background: linear-gradient(to right, rgba(248, 227, 227, 0), #bf2222);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+  }
+}

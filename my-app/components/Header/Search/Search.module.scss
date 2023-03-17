@@ -1,0 +1,125 @@
+@import "../../../css-config/mixins.scss";
+
+.searchModal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    top:0;left:0;
+    background: #fff;
+    transform: translateY(100%);
+    animation: slideSearch ease 0.3s forwards;
+    .formField {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px 50px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      position: relative;
+      @include md {
+        padding: 20px 0px;
+      }
+      input {
+        width: 100%;
+        max-wdith: 1200px;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: #212121;
+        outline: none;
+        border: none;
+        text-transform: uppercase;
+        @include md {
+          font-size: 40px;
+          height: 80px;
+        }
+        &:placeholder {
+
+        }
+      }
+      svg {
+        position: absolute;
+        font-size: 25px;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        @include md {
+          right: 50px;
+          font-size: 50px;
+        }
+      }
+    }
+    .searchResultContent {
+      max-width: calc(100% - 20px);
+      margin: 0 auto;
+      @include md {
+        max-width: 800px;
+      }
+      .searchResult {
+        height: calc(100vh - 110px);
+        overflow: auto;
+        margin: 20px 0;
+        @include md {
+          height: calc(100vh - 160px);
+        }
+        .searchResultItem {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(0,0,0,0.1);
+          cursor: pointer;
+          a {
+            all: unset;
+          }
+
+          .imgContainer {
+            background: rgba(0,0,0,0.05);
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .details {
+            overflow: hidden;
+            position: relative;
+            .name {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              font-size: 16px;
+              line-height: 1;
+              margin-bottom: 10px;
+              font-weight: 600;
+              padding-right: 25px;
+              display: block;
+            }
+            .description {
+              color: rgba(0,0,0,0.5);
+              font-size: 16px;
+              line-height: 1;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+          }
+ 
+ 
+        }
+      }
+    }
+}
+@keyframes slideSearch {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}

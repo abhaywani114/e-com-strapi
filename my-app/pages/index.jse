@@ -1,0 +1,39 @@
+import {useEffect, useContext} from "react"
+import Layout from "../components/Layout"
+import Banner from "../components/Home/Banner/Banner"
+import Products from "../components/Products/Products"
+import Category from "../components/Home/Category/Category"
+import style from "../styles/Home.module.scss"
+import {getCategories, getProducts} from "../service/stripeAPI"
+import {AppContext, AppAction} from "../context/AppContext"
+
+export async function getServerSideProps() {
+  const {data:categories} = await getCategories();
+  const {data:products} = await getProducts();
+  return {
+    props: {
+      categories: categories,
+      products: products
+    }
+  }
+}
+
+export default function Home({categories, products}) {
+  const {dispatch} = useContext(AppContext);
+  
+  useEffect( () => {
+    dispatch({action: AppAction.ADD_CATEGORY, payload: categories});
+    dispatch({action: AppAction.ADD_PRODUCTS, payload: products});
+  }, [categories, products]);
+  return (
+    <Layout title="ABZStore - the complete online store">
+      <Banner />
+      <div className={style.mainContent}>
+        <div className={style.layout}>
+          <Category />  
+          <Products data={products} />
+        </div>
+      </div>
+    </Layout>
+  )
+}
